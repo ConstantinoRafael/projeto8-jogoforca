@@ -15,10 +15,12 @@ export default function App() {
     let [preenchendoOsTracinhos, setPreenchendoOsTracinhos] = useState([]);
     const [clicadas, setClicadas] = useState(alfabeto);
     const [desabilitaInput, setDesabilitaInput] = useState(true);
-    const [desabilitabotao, setDesabilitabotao] = useState(true);
+    const [desabilitabotao, setDesabilitaBotao] = useState(true);
     let [imagem, setImagem] = useState(forca0);
     let [contador, setContador] = useState(0);
-
+    const[corPalavra, setCorPalavra] = useState("palavra-adivinhar");
+    const[chute, setChute] = useState("");
+    
     function ComecarJogo() {
         //Para pegar uma palavra de forma aleatória
         palavras.sort(comparador)
@@ -40,7 +42,7 @@ export default function App() {
 
         setDesabilitaInput(false);
 
-        setDesabilitabotao(false);
+        setDesabilitaBotao(false);
 
         setContador(0);
 
@@ -57,10 +59,9 @@ export default function App() {
         setClicadas([...clicadas, letraClicada]);
 
         if(palavra.includes(letraClicada) === false) {
-            setContador(contador + 1);
+            contador++;
+            setContador(contador);
         }
-
-        console.log(contador);
 
         switch (contador) {
             case 0:
@@ -87,17 +88,54 @@ export default function App() {
             default:
                 console.log("default");
         }
+
+        if(contador === 6){
+            perdeu();
+        }
+
+        console.log(chute);
+
+        if(!preenchendoOsTracinhos.includes("_")) {
+            ganhou();
+        }
+    
+        
+        
+
+        console.log(preenchendoOsTracinhos);
     }
 
+    function ganhou() {
+        setClicadas(alfabeto);
+        setPreenchendoOsTracinhos(palavra);
+        setCorPalavra("palavra-adivinhar ganhou"); 
+    }
+
+    
+    function perdeu() {
+        setClicadas(alfabeto);
+        setPreenchendoOsTracinhos(palavra);
+        setCorPalavra("palavra-adivinhar perdeu"); 
+    }
+
+    function chutar() {
+        setChute(chute);
+        if(chute === palavras[0]) {
+            ganhou();
+        } else {
+            perdeu();
+        }
+    }
+    
     
     return (
         <>
             <div className="cima">
-                <img src={imagem} alt={imagem} />
+                <img data-identifier="game-image" src={imagem} alt={imagem} />
                 <div className="direita">
-                    <button className="botao-comecar" onClick={ComecarJogo}>Escolher Palavra</button>
+                    <button data-identifier="choose-word" className="botao-comecar" onClick={ComecarJogo}>Escolher Palavra</button>
 
-                    <div className="palavra-adivinhar">
+                    <div data-identifier="word" className={corPalavra}>
                         {preenchendoOsTracinhos.map((p, index) => (<div className="cada-letra" key={index}>{p}</div>))}
                     </div>
 
@@ -107,12 +145,12 @@ export default function App() {
 
             <div className="baixo">
                 <div className="letras">
-                    {alfabeto.map((letra, index) => (<button className={clicadas.includes(letra) ? "botao-letra" : "botao-letra habilitado"} key={index} onClick={() => Clicada(letra)} disabled={desabilitabotao} >{letra}</button>))}
+                    {alfabeto.map((letra, index) => (<button data-identifier="letter" className={clicadas.includes(letra) ? "botao-letra" : "botao-letra habilitado"} key={index} onClick={() => Clicada(letra)} disabled={clicadas.includes(letra) ? true : false} >{letra}</button>))}
                 </div>
                 <div className="campo-de-chute">
                     <p>Já sei a palavra!</p>
-                    <input disabled={desabilitaInput}></input>
-                    <button className="botao-chute habilitado">Chutar</button>
+                    <input data-identifier="type-guess" disabled={desabilitaInput} value={chute} onChange={e => setChute(e.target.value)}></input>
+                    <button data-identifier="guess-button" className="botao-chute habilitado" onClick={chutar}>Chutar</button>
                 </div>
             </div>
         </>
