@@ -46,6 +46,10 @@ export default function App() {
 
         setContador(0);
 
+        setCorPalavra("palavra-adivinhar");
+
+        setImagem(forca0);
+
     }
 
     console.log(palavra);
@@ -116,8 +120,6 @@ export default function App() {
             perdeu();
         }
 
-        console.log(chute);
-
         if (!preenchendoOsTracinhos.includes("_")) {
             ganhou();
         }
@@ -149,6 +151,7 @@ export default function App() {
         if (chute === palavras[0]) {
             ganhou();
         } else {
+            setImagem(forca6);
             perdeu();
         }
     }
