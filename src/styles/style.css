@@ -2,8 +2,32 @@
     display: flex;
 }
 
+.cima>img {
+    margin: 10px 50px;
+}
+
+.direita{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.botao-comecar {
+    width: 300px;
+    height: 60px;
+    color:white;
+    font-size: 25px;
+    background-color: #61B060;
+    margin: 50px 100px;
+    border: none;
+    border-radius: 10px;
+}
+
 .palavra-adivinhar {
     display: flex;
+    font-size: 40px;
+    font-weight: 700;
 }
 
 .cada-letra {
@@ -13,12 +37,12 @@
 .letras {
     display: flex;
     flex-wrap: wrap;
-    margin: 50px 170px;
+    margin: 20px 200px;
 }   
 
 .botao-letra{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     color: #79818a;
     font-size: 30px;
     font-weight: 700;
@@ -34,9 +58,25 @@
     text-decoration-color: black;
 }
 
+.baixo{
+    margin-bottom: 50px;
+}
+
 .campo-de-chute {
     display: flex;
-    justify-content: center
+    justify-content: space-around;
+    align-items: center;
+}
+
+.campo-de-chute>p {
+    font-size: 30px;
+    margin-left: 100px;
+}
+
+.campo-de-chute>input {
+    width: 500px;
+    height: 40px;
+    font-size: 30px;
 }
 
 .botao-chute {
@@ -47,4 +87,11 @@
     margin: 10px;
     border-radius: 10px;
     border-color: #9faab5;
+    margin-right: 100px;
+}
+
+.habilitado {
+    background-color: #e1ecf4;
+    color: #39739d;
+    border-color: #39739d;
 }
