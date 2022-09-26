@@ -18,9 +18,9 @@ export default function App() {
     const [desabilitabotao, setDesabilitaBotao] = useState(true);
     let [imagem, setImagem] = useState(forca0);
     let [contador, setContador] = useState(0);
-    const[corPalavra, setCorPalavra] = useState("palavra-adivinhar");
-    const[chute, setChute] = useState("");
-    
+    const [corPalavra, setCorPalavra] = useState("palavra-adivinhar");
+    const [chute, setChute] = useState("");
+
     function ComecarJogo() {
         //Para pegar uma palavra de forma aleatória
         palavras.sort(comparador)
@@ -49,16 +49,39 @@ export default function App() {
     }
 
     console.log(palavra);
-    
+
     function Clicada(letraClicada) {
-        palavra.forEach((p, i) => ((p === letraClicada && preenchendoOsTracinhos[i] === "_") ? (preenchendoOsTracinhos[i] = p) : ""))
+        switch (letraClicada) {
+            case "a":
+                palavra.forEach((p, i) => (((p === letraClicada || p === "á" || p === "ã" || p === "â") && preenchendoOsTracinhos[i] === "_") ? (preenchendoOsTracinhos[i] = p) : ""))
+                break;
+            case "e":
+                palavra.forEach((p, i) => (((p === letraClicada || p === "é" || p === "ê") && preenchendoOsTracinhos[i] === "_") ? (preenchendoOsTracinhos[i] = p) : ""))
+                break;
+            case "i":
+                palavra.forEach((p, i) => (((p === letraClicada || p === "í" || p === "î") && preenchendoOsTracinhos[i] === "_") ? (preenchendoOsTracinhos[i] = p) : ""))
+                break;
+            case "o":
+                palavra.forEach((p, i) => (((p === letraClicada || p === "ó" || p === "õ" || p === "ô") && preenchendoOsTracinhos[i] === "_") ? (preenchendoOsTracinhos[i] = p) : ""))
+                break;
+            case "u":
+                palavra.forEach((p, i) => (((p === letraClicada || p === "ú") && preenchendoOsTracinhos[i] === "_") ? (preenchendoOsTracinhos[i] = p) : ""))
+                break;
+            case "c":
+                palavra.forEach((p, i) => (((p === letraClicada || p === "ç") && preenchendoOsTracinhos[i] === "_") ? (preenchendoOsTracinhos[i] = p) : ""))
+                break;
+            default:
+                palavra.forEach((p, i) => ((p === letraClicada && preenchendoOsTracinhos[i] === "_") ? (preenchendoOsTracinhos[i] = p) : ""))
+        }
+
+
         let estouPreenchendo = preenchendoOsTracinhos
         //console.log(estouPreenchendo);
         setPreenchendoOsTracinhos(estouPreenchendo);
 
         setClicadas([...clicadas, letraClicada]);
 
-        if(palavra.includes(letraClicada) === false) {
+        if (palavra.includes(letraClicada) === false) {
             contador++;
             setContador(contador);
         }
@@ -89,18 +112,18 @@ export default function App() {
                 console.log("default");
         }
 
-        if(contador === 6){
+        if (contador === 6) {
             perdeu();
         }
 
         console.log(chute);
 
-        if(!preenchendoOsTracinhos.includes("_")) {
+        if (!preenchendoOsTracinhos.includes("_")) {
             ganhou();
         }
-    
-        
-        
+
+
+
 
         console.log(preenchendoOsTracinhos);
     }
@@ -108,26 +131,29 @@ export default function App() {
     function ganhou() {
         setClicadas(alfabeto);
         setPreenchendoOsTracinhos(palavra);
-        setCorPalavra("palavra-adivinhar ganhou"); 
+        setCorPalavra("palavra-adivinhar ganhou");
     }
 
-    
+
     function perdeu() {
         setClicadas(alfabeto);
         setPreenchendoOsTracinhos(palavra);
-        setCorPalavra("palavra-adivinhar perdeu"); 
+        setCorPalavra("palavra-adivinhar perdeu");
     }
 
     function chutar() {
         setChute(chute);
-        if(chute === palavras[0]) {
+
+        console.log(chute);
+        console.log(palavras[0]);
+        if (chute === palavras[0]) {
             ganhou();
         } else {
             perdeu();
         }
     }
-    
-    
+
+
     return (
         <>
             <div className="cima">
