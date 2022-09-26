@@ -52,8 +52,6 @@ export default function App() {
 
     }
 
-    console.log(palavra);
-
     function Clicada(letraClicada) {
         switch (letraClicada) {
             case "a":
@@ -80,7 +78,7 @@ export default function App() {
 
 
         let estouPreenchendo = preenchendoOsTracinhos
-        //console.log(estouPreenchendo);
+
         setPreenchendoOsTracinhos(estouPreenchendo);
 
         setClicadas([...clicadas, letraClicada]);
@@ -124,10 +122,6 @@ export default function App() {
             ganhou();
         }
 
-
-
-
-        console.log(preenchendoOsTracinhos);
     }
 
     function ganhou() {
@@ -146,8 +140,6 @@ export default function App() {
     function chutar() {
         setChute(chute);
 
-        console.log(chute);
-        console.log(palavras[0]);
         if (chute === palavras[0]) {
             ganhou();
         } else {
