@@ -127,6 +127,7 @@ export default function App() {
     function ganhou() {
         setClicadas(alfabeto);
         setPreenchendoOsTracinhos(palavra);
+        setDesabilitaInput(true);
         setCorPalavra("palavra-adivinhar ganhou");
     }
 
@@ -134,6 +135,7 @@ export default function App() {
     function perdeu() {
         setClicadas(alfabeto);
         setPreenchendoOsTracinhos(palavra);
+        setDesabilitaInput(true);
         setCorPalavra("palavra-adivinhar perdeu");
     }
 
